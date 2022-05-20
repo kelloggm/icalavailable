@@ -134,7 +134,7 @@ public final class ICalAvailable {
   // static TimeZone tz1 = new TimeZone(new VTimeZone());
   // static TimeZone tz1 = tzRegistry.getTimeZone(canonicalizeTimezone(timezone1));
   /** The TimeZone represented by string {@link #timezone1}. */
-  static @MonotonicNonNull TimeZone tz1;
+  static TimeZone tz1;
 
   // If I'm outputting in a different timezone, then my notion of a "day"
   // may be different than the other timezone's notion of a "day".  This
@@ -147,7 +147,7 @@ public final class ICalAvailable {
   public static @Nullable String timezone2;
 
   /** The TimeZone represented by string {@link #timezone2}. */
-  static @Nullable TimeZone tz2;
+  static TimeZone tz2;
 
   /// Other variables
 
@@ -176,7 +176,6 @@ public final class ICalAvailable {
     "deprecation", // for iCal4j's use of Date.{get,set}Minutes
     "StringSplitter" // don't add dependence on Guava
   })
-  @EnsuresNonNull("tz1")
   static void processOptions(String[] args) {
     Options options = new Options("ICalAvailable [options]", ICalAvailable.class);
     String[] remaining_args = options.parse(true, args);
@@ -321,7 +320,6 @@ public final class ICalAvailable {
    * @param tz a printed representation to canonicalize
    * @return either the argument, or a shorter representation if possible
    */
-  @Pure
   static String printedTimezone(TimeZone tz) {
     String tzString = tz.getDisplayName();
     String result = printedTimezones.get(tzString);
@@ -329,7 +327,7 @@ public final class ICalAvailable {
   }
 
   /** Matches a printed representation of a time. */
-  static @Regex(4) Pattern timeRegexp =
+  static Pattern timeRegexp =
       Pattern.compile("([0-2]?[0-9])(:([0-5][0-9]))?([aApP][mM])?");
 
   /**
@@ -339,7 +337,6 @@ public final class ICalAvailable {
    * @return the time represented by {@code time}
    */
   @SuppressWarnings("deprecation") // for iCal4j
-  @RequiresNonNull("tz1")
   static DateTime parseTime(String time) {
 
     Matcher m = timeRegexp.matcher(time);
@@ -497,7 +494,6 @@ public final class ICalAvailable {
    */
   // Process day-by-day because otherwise weekends and evenings are included.
   @SuppressWarnings("unchecked") // for iCal4j
-  @RequiresNonNull("tz1")
   static List<Period> oneDayAvailable(DateTime day, List<Calendar> calendars) {
     if (debug) {
       System.err.printf("oneDayAvailable(%s, ...)%n", day);
@@ -524,7 +520,7 @@ public final class ICalAvailable {
       // daily events into a different format before inserting them.
       for (Calendar calendar : calendars) {
         // getComponents() returns a raw ArrayList.  Expose its element type.
-        ArrayList<@NonNull CalendarComponent> clist = calendar.getComponents();
+        ArrayList<CalendarComponent> clist = calendar.getComponents();
         for (CalendarComponent c : clist) {
           /* TODO
           if (c instanceof VEvent) {
