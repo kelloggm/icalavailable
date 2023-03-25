@@ -1,0 +1,26 @@
+
+> Task :compileJava
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.google.errorprone.util.ErrorProneTokens$CommentSavingTokenizer (file:/Users/mjk76/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_check_api/2.13.1/251914b562b8e814e8fe4bd178c51af8217b05e4/error_prone_check_api-2.13.1.jar) to field com.sun.tools.javac.parser.JavaTokenizer.reader
+WARNING: Please consider reporting this to the maintainers of com.google.errorprone.util.ErrorProneTokens$CommentSavingTokenizer
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+/Users/mjk76/Research/wpi/playground/icalavailable/src/main/java/org/plumelib/icalavailable/ICalAvailable.java:137: warning: [nullness:initialization.static.field.uninitialized] static field tz1 not initialized
+  static TimeZone tz1;
+                  ^
+/Users/mjk76/Research/wpi/playground/icalavailable/src/main/java/org/plumelib/icalavailable/ICalAvailable.java:150: warning: [nullness:initialization.static.field.uninitialized] static field tz2 not initialized
+  static TimeZone tz2;
+                  ^
+/Users/mjk76/Research/wpi/playground/icalavailable/src/main/java/org/plumelib/icalavailable/ICalAvailable.java:348: warning: [regex:group.count] invalid groups parameter 1. Only 0 groups are guaranteed to exist for m.
+    @NonNull String hourString = m.group(1);
+                                         ^
+/Users/mjk76/Research/wpi/playground/icalavailable/src/main/java/org/plumelib/icalavailable/ICalAvailable.java:349: warning: [regex:group.count] invalid groups parameter 3. Only 0 groups are guaranteed to exist for m.
+    String minuteString = m.group(3);
+                                  ^
+/Users/mjk76/Research/wpi/playground/icalavailable/src/main/java/org/plumelib/icalavailable/ICalAvailable.java:350: warning: [regex:group.count] invalid groups parameter 4. Only 0 groups are guaranteed to exist for m.
+    String ampmString = m.group(4);
+                                ^
+5 warnings
+
+BUILD SUCCESSFUL in 33s
+2 actionable tasks: 2 executed
